@@ -77,7 +77,7 @@ const Login = () => {
       </div>
       <form
         action=""
-        className="absolute bg-black bg-opacity-80 p-12 w-1/4 my-24 mx-auto right-0 left-0 text-white"
+        className="absolute bg-black bg-opacity-80 p-12 w-10/12 md:w-1/2 lg:w-1/4 my-24 mx-auto right-0 left-0 text-white"
       >
         <div className="flex justify-center">
           <img src="Logow.png" alt="Logo" className="w-44 " />
