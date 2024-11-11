@@ -71,7 +71,7 @@ const Login = () => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <div className="absolute">
         <img src="bg-image5.jpg" alt="bg-image" className="fixed h-screen w-screen" />
       </div>
