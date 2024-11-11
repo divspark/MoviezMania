@@ -25,7 +25,26 @@ const MovieDetail = () => {
     fetchMovieDetails();
   }, [movieId]); // Re-run when movieId changes
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div className="movie-detail max-w-4xl mx-auto bg-gray-800 rounded-lg p-6 mt-10 shadow-lg">
+        <div className="flex flex-col md:flex-row items-center">
+          {/* Shimmer Placeholder for Image */}
+          <div className="w-full md:w-1/3 h-64 bg-gray-300 rounded-lg shimmer mb-4 md:mb-0"></div>
+
+          <div className="md:ml-6 text-white">
+            {/* Shimmer Placeholder for Text */}
+            <div className="h-8 bg-gray-300 shimmer w-3/4 mb-4"></div>
+            <div className="h-6 bg-gray-300 shimmer w-1/2 mb-4"></div>
+            <div className="h-4 bg-gray-300 shimmer w-full mb-4"></div>
+            <div className="h-4 bg-gray-300 shimmer w-2/3 mb-4"></div>
+            <div className="h-4 bg-gray-300 shimmer w-3/4 mb-4"></div>
+            <div className="h-4 bg-gray-300 shimmer w-1/2 mb-4"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!movie) return <p>Movie not found</p>; // Handle case where movie is not found
 
