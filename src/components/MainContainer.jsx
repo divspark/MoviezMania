@@ -16,7 +16,7 @@ const MainContainer = () => {
     <div className="relative">
       {/* Video Title Section */}
       {mainMovie && (
-        <VideoTitle title={original_title} overview={overview} />
+        <VideoTitle title={original_title} overview={overview} movieId={id}/>
       )}
 
       {/* Video Background Section */}
