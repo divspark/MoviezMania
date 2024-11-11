@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IMG_CDN_URL } from '../utils/constants';
 import { addFavorite, removeFavorite } from '../store/favouriteSlice'; // Redux actions for favorites
@@ -12,14 +12,18 @@ const MovieCard = ({ movie }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false); // Track image loading state
   const favorites = useSelector((state) => state.favorites.movies);
 
+  // Check if movie is in the favorites list on component mount
+  useEffect(() => {
+    setIsFavorite(favorites.some((fav) => fav.id === movie.id));
+  }, [favorites, movie.id]);
+
   const handleFavoriteToggle = () => {
     if (isFavorite) {
       dispatch(removeFavorite(movie.id));
-      setIsFavorite(false);
     } else {
       dispatch(addFavorite(movie));
-      setIsFavorite(true);
     }
+    setIsFavorite(!isFavorite); // Toggle the favorite state
   };
 
   const navigateToMovieDetail = () => {
