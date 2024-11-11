@@ -1,10 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { Dovalidate } from "../utils/validate";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../config/firebase";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
+
 
   const name = useRef();
   const email = useRef();
@@ -18,9 +23,40 @@ const Login = () => {
     e.preventDefault();
     const msg = Dovalidate(email.current.value,password.current.value);
     setErrorMessage(msg);
+    if (msg !== null) return;
 
     //Sign In / Sign Up Logic
+    if(isSignInForm){
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+  .then((userCredential) => {
+    const user = userCredential.user;
+    console.log(user);
+    navigate("/browse");
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrorMessage(errorCode + "-" + errorMessage);
+  });
+    }else{
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+  .then((userCredential) => {
+    const user = userCredential.user;
+    updateProfile(auth.currentUser, {
+      displayName: name.current.value, photoURL: "https://example.com/jane-q-user/profile.jpg"
+    }).then(() => {
+      navigate("/browse");
+    }).catch((error) => {
+      setErrorMessage(error);
+    });
     
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrorMessage(errorCode + "-" + errorMessage);
+  });
+    }
   };
 
   return (
