@@ -39,7 +39,7 @@ const Header = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/search/keyword?query=${query}&page=1`,
+        `https://api.themoviedb.org/3/search/movie?query=${query}&page=1`, // Change the endpoint to search for movies
         ApiOptions
       );
       
@@ -85,7 +85,7 @@ const Header = () => {
 
   // Handle suggestion click to navigate to the movie detail page
   const handleSuggestionClick = (id) => {
-    navigate(`/${id}`);
+    navigate(`/${id}`); // Update the route to navigate to the correct movie details page
   };
 
   // Handle click outside to hide suggestions
@@ -101,11 +101,11 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-full flex justify-between items-center">
-      <img src="Logow.png" alt="Logow" className="w-32" />
+    <div className="absolute px-4 py-2 bg-gradient-to-b from-black z-10 w-full flex flex-wrap justify-between items-center">
+      <img src="Logow.png" alt="Logow" className="w-32 sm:w-24" />
 
       {/* Search Bar */}
-      <div className="flex items-center relative w-1/3" ref={searchRef}>
+      <div className="flex items-center relative w-full sm:w-1/3 mt-2 sm:mt-0" ref={searchRef}>
         <input
           type="text"
           placeholder="Search..."
@@ -125,7 +125,7 @@ const Header = () => {
                   className="p-2 cursor-pointer hover:bg-gray-700"
                   onClick={() => handleSuggestionClick(result.id)} // Navigate on click
                 >
-                  {result.name}
+                  {result.title} {/* Use title instead of name for movie results */}
                 </li>
               ))}
             </ul>
@@ -141,7 +141,7 @@ const Header = () => {
       </div>
 
       {/* User Icon and Sign Out Button */}
-      <div className="flex items-center">
+      <div className="flex items-center mt-2 sm:mt-0">
         <img
           src="userIcon.png"
           alt="user-icon"

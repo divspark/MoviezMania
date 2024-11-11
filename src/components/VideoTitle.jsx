@@ -8,7 +8,7 @@ const VideoTitle = ({ title, overview, movieId }) => {
  
   const handleRedirect = (type) => {
     if (type === 'play' || type === 'info') {
-      navigate(`/${movieId}`); 
+      navigate(`/movie/${movieId}`); 
     }
   };
 
