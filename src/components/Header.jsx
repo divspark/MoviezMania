@@ -1,26 +1,13 @@
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
 import { auth } from "../config/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { addUser, removeUser } from "../store/userslice";
-import { FaSearch } from "react-icons/fa"; // For the search icon
-import axios from "axios"; // For API requests
-import { ApiOptions } from "../utils/constants";
-
-const IMG_CDN_URL = 'https://image.tmdb.org/t/p/w500'; // Base URL for images
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // State for search input, results, and loading status
-  const [query, setQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  // Ref to handle clicks outside of the search area
-  const searchRef = useRef(null);
 
   // Handle sign out
   const handleSignOut = () => {
@@ -28,37 +15,6 @@ const Header = () => {
       .then(() => {})
       .catch((error) => {});
   };
-
-  // Search API request with debouncing
-  const fetchSearchResults = useCallback(async () => {
-    if (!query) {
-      setSearchResults([]);  // Clear results if query is empty
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?query=${query}&page=1`, // Change the endpoint to search for movies
-        ApiOptions
-      );
-      
-      setSearchResults(response.data.results.slice(0, 6));  // Limit to first 6 results
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching search results:", error);
-      setLoading(false);
-    }
-  }, [query]);
-
-  // Debounce the search input
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      fetchSearchResults();
-    }, 500); // 500ms delay to avoid frequent API calls
-
-    return () => clearTimeout(timer); // Cleanup the timer on component unmount or query change
-  }, [query, fetchSearchResults]);
 
   // Handle authentication state
   useEffect(() => {
@@ -83,61 +39,21 @@ const Header = () => {
     return () => unsubscribe();
   }, [auth, dispatch, navigate]);
 
-  // Handle suggestion click to navigate to the movie detail page
-  const handleSuggestionClick = (id) => {
-    navigate(`/${id}`); // Update the route to navigate to the correct movie details page
-  };
-
-  // Handle click outside to hide suggestions
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (searchRef.current && !searchRef.current.contains(e.target)) {
-        setSearchResults([]);  // Clear suggestions if click is outside the search area
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   return (
     <div className="absolute px-4 py-2 bg-gradient-to-b from-black z-10 w-full flex flex-wrap justify-between items-center">
       <img src="Logow.png" alt="Logow" className="w-32 sm:w-24" />
 
-      {/* Search Bar */}
-      <div className="flex items-center relative w-full sm:w-1/3 mt-2 sm:mt-0" ref={searchRef}>
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-full py-3 pl-4 pr-10 bg-gray-800 text-white rounded-full outline-none"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)} // Update query on input change
-        />
-        <FaSearch className="absolute right-3 text-gray-400 cursor-pointer" />
-
-        {/* Display Search Suggestions */}
-        {query && !loading && searchResults.length > 0 && (
-          <div className="absolute top-full left-0 w-full bg-gray-800 text-white rounded-lg shadow-lg mt-2">
-            <ul>
-              {searchResults.map((result) => (
-                <li
-                  key={result.id}
-                  className="p-2 cursor-pointer hover:bg-gray-700"
-                  onClick={() => handleSuggestionClick(result.id)} // Navigate on click
-                >
-                  {result.title} {/* Use title instead of name for movie results */}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Show loading indicator if the search is in progress */}
-        {loading && (
-          <div className="absolute top-full left-0 w-full bg-gray-800 text-white rounded-lg shadow-lg mt-2 p-2 text-center">
-            Loading...
-          </div>
-        )}
+      {/* Navigation Links */}
+      <div className="flex space-x-14 mt-2 sm:mt-0">
+        <Link to="/" className="text-white font-semibold">
+          Home
+        </Link>
+        <Link to="/search" className="text-white font-semibold">
+          Search
+        </Link>
+        <Link to="/favourites" className="text-white font-semibold">
+          Favorites
+        </Link>
       </div>
 
       {/* User Icon and Sign Out Button */}

@@ -5,6 +5,8 @@ import Login from "./components/Login";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import MovieDetail from "./components/MovieDetail";
+import SearchPage from "./components/Search";
+import FavoritePage from "./components/FavouritePage";
 
 const App = () => {
   return (
@@ -15,6 +17,8 @@ const App = () => {
             <Route path="/" element={<Browse />} />
             <Route path="/login" element={<Login />} />
             <Route path="/:movieId" element={<MovieDetail />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/favourites" element={<FavoritePage />} />
           </Routes>
         </div>
       </Provider>

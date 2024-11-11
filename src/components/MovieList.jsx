@@ -2,7 +2,7 @@ import React from 'react';
 import MovieCard from './MovieCard';
 
 const MovieList = ({ title, movies }) => {
-  console.log(movies);  // Logging movies to see the structure
+  //console.log(movies);  // Logging movies to see the structure
   return (
     <div className='px-6 py-3 bg-op'>
       <h1 className='text-2xl font-normal text-white mb-2'>{title}</h1>
