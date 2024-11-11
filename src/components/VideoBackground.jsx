@@ -20,7 +20,10 @@ const VideoBackground = ({ movieId }) => {
           allowFullScreen
         ></iframe>
       ) : (
-        <p>Loading trailer...</p>
+        // Shimmer Effect Placeholder
+        <div className="w-screen h-64 bg-gray-300 animate-pulse">
+          <div className="w-full h-full bg-gray-400 animate-pulse"></div>
+        </div>
       )}
     </div>
   );
