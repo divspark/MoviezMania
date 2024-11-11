@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { Dovalidate } from "../utils/validate";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { addUser } from '../store/userslice';
 import { Profile_Url } from '../utils/constants';
