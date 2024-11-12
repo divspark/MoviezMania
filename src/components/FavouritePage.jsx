@@ -11,7 +11,7 @@ const FavoritePage = () => {
     <>
     <Header />
     <div className="favorite-page p-4 bg-black min-h-screen bg-opacity-85 ">
-      <h2 className=" text-white mt-6 mb-12 text-3xl text-center font-semibold mt-24">
+      <h2 className=" text-white mb-12 text-3xl text-center font-semibold mt-24">
         My Favorite Movies
       </h2>
 
