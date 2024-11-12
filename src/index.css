@@ -21,3 +21,6 @@
     animation: shimmer 1.5s infinite;
   }
 }
+body, html {
+  overflow-x: hidden;
+}
