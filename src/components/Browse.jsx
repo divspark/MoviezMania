@@ -14,7 +14,7 @@ const Browse = () => {
   useUpcomingMovies();
 
   return (
-    <div>
+    <div className="w-screen">
       <Header />
       <MainContainer />
       <SecondaryContainer/>

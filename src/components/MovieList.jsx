@@ -4,7 +4,7 @@ import MovieCard from './MovieCard';
 const MovieList = ({ title, movies }) => {
   //console.log(movies);  // Logging movies to see the structure
   return (
-    <div className='px-6 py-3 bg-op'>
+    <div className='px-6 py-3 '>
       <h1 className='text-2xl font-normal text-white mb-2'>{title}</h1>
       <div className='flex overflow-x-scroll scrollbar-hide'>
         <div className='flex'>

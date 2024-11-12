@@ -13,7 +13,7 @@ const MainContainer = () => {
   const id = mainMovie?.id;
 
   return (
-    <div className="relative">
+    <div className="relative w-screen">
       {/* Video Title Section */}
       {mainMovie && (
         <VideoTitle title={original_title} overview={overview} movieId={id}/>

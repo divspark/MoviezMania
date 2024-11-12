@@ -61,7 +61,7 @@ const SearchPage = () => {
 
   return (
     <>
-    <div className="search-page p-4 bg-black min-h-screen bg-opacity-85">
+    <div className="search-page p-4 bg-black min-h-screen bg-opacity-85 w-screen">
       {/* Search Bar */}
       <div className="flex justify-center mb-8">
         <form

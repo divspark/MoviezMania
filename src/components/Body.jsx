@@ -13,7 +13,7 @@ const Body = () => {
  
 
   return (
-    <div>
+    <div className="w-screen">
       <Login />
       <Browse />
     </div>

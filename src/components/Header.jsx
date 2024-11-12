@@ -1,13 +1,15 @@
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "../config/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { addUser, removeUser } from "../store/userslice";
+import { HiMenu, HiX } from "react-icons/hi"; // Icons for hamburger and close
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Handle sign out
   const handleSignOut = () => {
@@ -23,10 +25,10 @@ const Header = () => {
         const { uid, email, displayName, photoURL } = user;
         dispatch(
           addUser({
-            uid: uid,
-            email: email,
-            displayName: displayName,
-            photoURL: photoURL,
+            uid,
+            email,
+            displayName,
+            photoURL,
           })
         );
         navigate("/");
@@ -40,11 +42,11 @@ const Header = () => {
   }, [auth, dispatch, navigate]);
 
   return (
-    <div className="absolute px-4 py-2 bg-gradient-to-b from-black z-10 w-full flex flex-wrap justify-between items-center">
-      <img src="Logow.png" alt="Logow" className="w-32 sm:w-24" />
+    <div className="absolute px-4 py-2 bg-gradient-to-b from-black z-10 w-screen flex justify-between items-center">
+      <img src="Logow.png" alt="Logow" className="w-20 sm:w-44 px-0 lg:px-6" />
 
-      {/* Navigation Links */}
-      <div className="flex space-x-14 mt-2 sm:mt-0">
+      {/* Navigation Links for larger screens */}
+      <div className="hidden md:flex space-x-14 px-10">
         <Link to="/" className="text-white font-semibold">
           Home
         </Link>
@@ -54,19 +56,57 @@ const Header = () => {
         <Link to="/favourites" className="text-white font-semibold">
           Favorites
         </Link>
-      </div>
-
-      {/* User Icon and Sign Out Button */}
-      <div className="flex items-center mt-2 sm:mt-0">
-        <img
-          src="userIcon.png"
-          alt="user-icon"
-          className="w-10 h-10 bg-green-600 rounded-full p-1 mr-2"
-        />
         <button className="font-semibold text-white" onClick={handleSignOut}>
           Sign Out
         </button>
       </div>
+
+      {/* Hamburger Menu for small screens */}
+      <div className="md:hidden flex items-center">
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? (
+            <HiX className="text-white w-8 h-8" /> // Close icon
+          ) : (
+            <HiMenu className="text-white w-8 h-8" /> // Hamburger icon
+          )}
+        </button>
+      </div>
+
+      {/* Menu Drawer for small screens */}
+      {isMenuOpen && (
+        <div className="absolute top-14 right-0 w-full bg-black bg-opacity-90 flex flex-col items-center py-4 space-y-4 md:hidden">
+          <Link
+            to="/"
+            className="text-white font-semibold"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
+            to="/search"
+            className="text-white font-semibold"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Search
+          </Link>
+          <Link
+            to="/favourites"
+            className="text-white font-semibold"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Favorites
+          </Link>
+          <button
+            className="font-semibold text-white"
+            onClick={() => {
+              handleSignOut();
+              setIsMenuOpen(false);
+            }}
+          >
+            Sign Out
+          </button>
+        </div>
+      )}
     </div>
   );
 };
