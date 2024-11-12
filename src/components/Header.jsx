@@ -23,27 +23,30 @@ const Header = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName, photoURL } = user;
-        dispatch(
-          addUser({
-            uid,
-            email,
-            displayName,
-            photoURL,
-          })
-        );
-        navigate("/");
+        dispatch(addUser({ uid, email, displayName, photoURL }));
+        
+        // Only navigate if we're not on the home page
+        if (window.location.pathname === "/login") {
+          navigate("/");
+        }
       } else {
         dispatch(removeUser());
-        navigate("/login");
+  
+        // Navigate to login only if not on the login page
+        if (window.location.pathname !== "/login") {
+          navigate("/login");
+        }
       }
     });
-
+  
     return () => unsubscribe();
   }, [auth, dispatch, navigate]);
 
   return (
     <div className="absolute px-4 py-2 bg-gradient-to-b from-black z-10 w-screen flex justify-between items-center">
-      <img src="Logow.png" alt="Logow" className="w-20 sm:w-44 px-0 lg:px-6" />
+      <Link to="/">
+        <img src="Logow.png" alt="Logow" className="w-20 sm:w-44 px-0 lg:px-6" />
+      </Link>
 
       {/* Navigation Links for larger screens */}
       <div className="hidden md:flex space-x-14 px-10">

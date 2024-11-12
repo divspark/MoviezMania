@@ -61,9 +61,10 @@ const SearchPage = () => {
 
   return (
     <>
+    <Header />
     <div className="search-page p-4 bg-black min-h-screen bg-opacity-85 w-screen">
       {/* Search Bar */}
-      <div className="flex justify-center mb-8">
+      <div className="flex justify-center mb-8 mt-24">
         <form
           onSubmit={(e) => e.preventDefault()}
           className="flex items-center w-full max-w-lg"

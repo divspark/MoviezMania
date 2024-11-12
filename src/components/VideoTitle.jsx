@@ -29,7 +29,7 @@ const VideoTitle = ({ title, overview, movieId }) => {
           className="flex items-center justify-center bg-white hover:bg-opacity-80 text-black py-2 px-2 sm:py-3 sm:px-8 w-10 sm:w-36 text-sm sm:text-lg rounded-full"
           onClick={() => handleRedirect('play')}
         >
-          <FaPlay className="text-lg sm:text-xl  inline" /> 
+          <FaPlay className="text-lg sm:text-xl mr-0 md:mr-2  inline" /> 
           <span className="hidden sm:inline">Play</span>
         </button>
         
@@ -38,7 +38,7 @@ const VideoTitle = ({ title, overview, movieId }) => {
           className="flex items-center justify-center bg-gray-700 text-white py-3 px-2 sm:py-3 sm:px-8 w-12 sm:w-44 text-md sm:text-lg hover:bg-opacity-50 rounded-full"
           onClick={() => handleRedirect('info')}
         >
-          <FaInfoCircle className="text-lg sm:text-xl inline" /> 
+          <FaInfoCircle className="text-lg sm:text-xl inline mr-0 md:mr-2" /> 
           <span className="hidden sm:inline">More Info</span>
         </button>
       </div>

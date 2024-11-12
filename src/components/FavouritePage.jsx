@@ -1,14 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import MovieCard from "./MovieCard"; // Import MovieCard component
+import Header from "./Header";
 
 const FavoritePage = () => {
   // Access the list of favorite movies from Redux store
   const favorites = useSelector((state) => state.favorites.movies);
 
   return (
-    <div className="favorite-page p-4 bg-black min-h-screen bg-opacity-85">
-      <h2 className=" text-white mt-6 mb-12 text-3xl text-center font-semibold">
+    <>
+    <Header />
+    <div className="favorite-page p-4 bg-black min-h-screen bg-opacity-85 ">
+      <h2 className=" text-white mt-6 mb-12 text-3xl text-center font-semibold mt-24">
         My Favorite Movies
       </h2>
 
@@ -28,6 +31,7 @@ const FavoritePage = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
