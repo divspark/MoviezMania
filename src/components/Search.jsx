@@ -84,12 +84,14 @@ const SearchPage = () => {
       {loading ? (
         <Shimmer />
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-8 gap-6 mt-8">
+        <div className="flex justify-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mt-8 w-10/12">
           {movies.length > 0 ? (
             movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
           ) : (
             <div className="text-center text-gray-500">No results found</div>
           )}
+        </div>
         </div>
       )}
     </div>
