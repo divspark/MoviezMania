@@ -7,7 +7,7 @@ import Header from "./Header";
 
 const Shimmer = () => (
   <div className="flex justify-center">
-  <div className="shimmer-container grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mt-8 w-10/12 ">
+  <div className="shimmer-container grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mt-8 w-3/5 sm:w-10/12 ">
     {[...Array(8)].map((_, index) => (
       <div
         key={index}
@@ -87,7 +87,7 @@ const SearchPage = () => {
         <Shimmer />
       ) : (
         <div className="flex justify-center">
-        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mt-8 w-10/12">
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mt-8 w-3/5 sm:w-10/12">
           {movies.length > 0 ? (
             movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
           ) : (
