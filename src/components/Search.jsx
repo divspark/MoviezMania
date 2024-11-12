@@ -46,7 +46,7 @@ const SearchPage = () => {
           );
           setMovies(response.data.results); // Set the movie data from API response
         } catch (error) {
-          console.error("Error fetching movies:", error);
+          //console.error("Error fetching movies:", error);
         } finally {
           setLoading(false);
         }
